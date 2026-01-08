@@ -14,6 +14,7 @@ try {
     {
       "--start": Boolean,
       "--info": Boolean,
+      "--json": Boolean,
     },
     { permissive: true }
   );
@@ -23,7 +24,11 @@ try {
   let commandExecuted = false;
 
   if (args["--info"]) {
-    info();
+    const options = {
+      json: Boolean(args["--json"]),
+    };
+
+    info(options);
     commandExecuted = true;
   }
 
@@ -45,5 +50,6 @@ try {
 function usage() {
   console.log(`${chalk.whiteBright("tool [CMD]")}
   ${chalk.greenBright("--start")}\tStarts the app
-  ${chalk.greenBright("--info")}\tInformation about the app`);
+  ${chalk.greenBright("--info")}\tInformation about the app
+  ${chalk.greenBright("--info --json")}\tInformation in json format`);
 }
